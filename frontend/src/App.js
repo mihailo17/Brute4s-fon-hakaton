@@ -15,7 +15,9 @@ function App() {
   const [markers, setMarkers] = React.useState([])
 
   const onMapClick = React.useCallback((event) => {
-    setMarkers(() => [{
+    setMarkers((current) => [
+      ...current,
+      {
        lat: event.latLng.lat(),
        lng: event.latLng.lng(),
        time: new Date()
