@@ -25,6 +25,23 @@ const giverSchema = new mongoose.Schema({
   }]
 });
 
+giverSchema.statics.findByCredentials = async (email, password) => {
+  const giver = await Giver.findOne({ email });
+
+  if (!giver) {
+      throw new Error('Unable to login');
+  }
+
+  const isMatch = await bcrypt.compare(password, giver.password);
+
+  if (!isMatch) {
+      throw new Error('Unable to login');
+  }
+
+  return giver;
+};  
+
+
 giverSchema.methods.toJSON = function() {
   const giver = this;
   const giverObject = giver.toObject();

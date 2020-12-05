@@ -1,3 +1,5 @@
 {
-  "jwtSecret": "heynowheynowdontdreamitsover"
+  "jwtSecret": "heynowheynowdontdreamitsover",
+  "mongoUserName": "cba",
+  "mongoPass": "cba"
 }
