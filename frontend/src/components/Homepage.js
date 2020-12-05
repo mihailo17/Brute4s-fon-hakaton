@@ -9,7 +9,7 @@ export default function Homepage() {
     
     <h2>Molimo ulogujte se ili registrujte da biste koristili aplikaciju</h2>
     
-    <div className="welcome-form">
+    <div className="welcome">
       <Link to="/register">Registrujte se</Link>
       <Link className="link" to="/login">Ulogujte se</Link>
     </div>
