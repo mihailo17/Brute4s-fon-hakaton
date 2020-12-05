@@ -1,25 +1,33 @@
-import './App.css';
-import React from "react"
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow
-} from "@react-google-map/api";
-
+import React from 'react'
+import { GoogleMap, LoadScript } from '@react-google-maps/api';
+ 
+const containerStyle = {
+  width: '100vw',
+  height: '100vh'
+};
+ 
+const center = {
+  lat: 44.77328254755136, 
+  lng: 20.475249457670806
+};
+ 
 function App() {
-
-  const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-  })
+  const [map, setMap] = React.useState(null)
 
   return (
-    <div className="App">
-      
-      
-    </div>
-  );
+    <LoadScript
+      googleMapsApiKey="AIzaSyAMBqfNf9HiDaVKKMilXtupWqc4sWebse4"
+    >
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={19}
+      >
+        { /* Child components, such as markers, info windows, etc. */ }
+        <></>
+      </GoogleMap>
+    </LoadScript>
+  )
 }
-
+ 
 export default App;
-  
