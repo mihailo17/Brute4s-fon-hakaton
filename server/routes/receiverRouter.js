@@ -2,7 +2,7 @@ const express = require('express');
 const router = new express.Router();
 const addReceiver = require('../receiverLogic/addReceiver.js');
 
-router.post('/addReceiver', (req, res) => {
+router.post('/receivers', (req, res) => {
   addReceiver(req, res);
 });
 
