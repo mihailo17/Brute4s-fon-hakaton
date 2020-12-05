@@ -54,7 +54,7 @@ giverSchema.methods.toJSON = function() {
 
 giverSchema.methods.generateAuthToken = async function() {
   const giver = this;
-  const token = jwt.sign({ _id: giver._id.toString() }, jwtSecret);
+  const token = jwt.sign({ _id: giver._id.toString(), userType: 'giver' }, jwtSecret);
 
   giver.tokens = giver.tokens.concat({ token });
 

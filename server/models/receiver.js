@@ -54,7 +54,7 @@ receiverSchema.methods.toJSON = function() {
 
 receiverSchema.methods.generateAuthToken = async function() {
   const receiver = this;
-  const token = jwt.sign({ _id: receiver._id.toString() }, jwtSecret);
+  const token = jwt.sign({ _id: receiver._id.toString(), userType: 'receiver' }, jwtSecret);
 
   receiver.tokens = receiver.tokens.concat({ token });
 

@@ -1,8 +1,11 @@
-const giverLogin = require("./giverLogin")
-
-const giverLogout = (req, res) => {
+const giverLogout = async (req, res) => {
   try {
-    console.log(req.giver);
+    req.giver.tokens = req.giver.tokens.filter(token => {
+      return token.token !== req.token
+    });
+
+    await req.giver.save();
+
     res.send();
   } catch(error) {
     console.log(error);
