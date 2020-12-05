@@ -12,9 +12,10 @@ async function submitRegisterForm(e){
     if (selectUserType === "giver") {
       const response = await axios.post("http://localhost:8090/givers", {email, password});
       console.log(response)
+      // sacuvam token iz responsa i da ulogujem usera i preusmerim na giver stranicu
     }
     else {
-
+      // ovde preusmerim na receiver stranicu http://localhost:8090/receivers
     }
     
   } catch (error) {
