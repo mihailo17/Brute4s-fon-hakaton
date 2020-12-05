@@ -1,5 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 export default function Homepage() {
-  return <div> Initial page shown when you come to the appplication</div>
+  
+  return (
+  <>
+    <h1>Dobrodosli u aplikaciju</h1>
+    
+    <h2>Molimo ulogujte se ili registrujte da biste koristili aplikaciju</h2>
+    
+    <div className="welcome-form">
+      <Link to="/register">Registrujte se</Link>
+      <Link className="link" to="/login">Ulogujte se</Link>
+    </div>
+  </>
+  )
 }
