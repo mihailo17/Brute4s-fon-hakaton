@@ -1,6 +1,6 @@
 import React from 'react'
 import Directions from './Directions'
-import { GoogleMap, LoadScript, Marker, DirectionsRenderer, DirectionsService } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 
 const containerStyle = {
   width: '100vw',
@@ -11,13 +11,15 @@ const center = {
   lat: 44.77328254755136, 
   lng: 20.475249457670806
 };
-
+  
+var markerList = {};
 
 function App() {
   const [markers, setMarkers] = React.useState([])
-  const [map, setMap] = React.useState(null)
+//  const [map, setMap] = React.useState(null)
 
   const onMapClick = React.useCallback((event) => {
+    
     setMarkers((current) => [
       ...current,
       {
@@ -26,6 +28,19 @@ function App() {
        time: new Date()
     }]);
   }, []);
+
+  const onMarkerClicked = event => {  
+
+    var key = event.latLng.lat() + " " + event.latLng.lng();
+
+    if(key in markerList){
+      delete markerList[key];
+    } else {
+      markerList[key] = [event.latLng.lat(), event.latLng.lng()];
+    }
+
+    console.log(markerList); 
+  };
 
   return (
     <LoadScript
@@ -42,6 +57,7 @@ function App() {
             <Marker
                key={marker.time.toISOString()}
                position={{lat: marker.lat, lng: marker.lng}}
+               onClick={onMarkerClicked}
             >
             </Marker>
          ))

@@ -32,8 +32,8 @@ class Directions extends Component {
 
   render () {
     var route1 = {
-      origin: 'Belgrade',
-      destination: 'Zajecar',
+      origin: 'Gavrila Principa 48, Belgrade',
+      destination: 'Gavrila Principa 48, Belgrade',
       waypoints: [
         {
           location : {
