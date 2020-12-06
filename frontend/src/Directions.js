@@ -17,7 +17,7 @@ class Directions extends Component {
   }
 
   directionsCallback (response) {    
-    // console.log(response)
+    console.log(response)
 
     if (response !== null) {
       if (response.status === 'OK') {
@@ -27,7 +27,7 @@ class Directions extends Component {
           })
         )
       } else {
-        // console.log('response: ', response)    
+        console.log('response: ', response)    
       }
     }
   }
@@ -35,8 +35,10 @@ class Directions extends Component {
   render () {
     let waypoints = this.state.optimalRoute.waypoints;
     var route1 = {
-      origin: 'Gavrila Principa 48, Belgrade',
-      destination: 'Gavrila Principa 48, Belgrade',
+      // origin: 'Gavrila Principa 48, Belgrade',
+      // destination: 'Gavrila Principa 48, Belgrade',
+      origin: this.state.optimalRoute.origin,
+      destination: this.state.optimalRoute.destination,
       waypoints: this.state.optimalRoute.waypoints,
       travelMode: 'DRIVING',
       optimizeWaypoints: true,
@@ -68,9 +70,9 @@ class Directions extends Component {
                 directions: this.state.response
               }}
               // optional
-              // onLoad={directionsRenderer => {
-              //   console.log('DirectionsRenderer onLoad directionsRenderer: ', directionsRenderer);
-              // }}
+              onLoad={directionsRenderer => {
+                console.log('DirectionsRenderer onLoad directionsRenderer: ', directionsRenderer);
+              }}
 
             />
           )
