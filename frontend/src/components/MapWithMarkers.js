@@ -5,12 +5,6 @@ import Directions from '../Directions'
 import { GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 import axios from 'axios';
 
-
-const containerStyle = {
-  width: '100vw',
-  height: '100vh'
-};
-
 // Map starting center point
 const center = {
   lat: 44.77328254755136, 
@@ -60,7 +54,7 @@ class MapWithMarkers extends Component {
     let cond = false;
 
     this.state.markerList.forEach(elem => {
-      if (elem.lat == event.latLng.lat() && elem.lng == event.latLng.lng()){
+      if (elem.lat === event.latLng.lat() && elem.lng === event.latLng.lng()){
         cond = true;
       }
     });
@@ -73,7 +67,7 @@ class MapWithMarkers extends Component {
 
     if(cond){
       const updatedMarkerList = this.state.markerList.filter(disclaimedProd => {
-        if(!(disclaimedProd.lat == key.lat && disclaimedProd.lng == key.lng))
+        if(!(disclaimedProd.lat === key.lat && disclaimedProd.lng === key.lng))
           return true;
       });
       this.setState({
