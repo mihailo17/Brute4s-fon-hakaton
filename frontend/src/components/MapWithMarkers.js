@@ -28,7 +28,9 @@ class MapWithMarkers extends Component {
       markerList: [],
       routeCreated: [],
       directionsIndicator: false,
-      allGarbage: []
+      allGarbage: [],
+      markerInfo: '',
+      markerListIds: []
     };
     
     this.onMapClick = this.onMapClick.bind(this)
@@ -88,18 +90,20 @@ class MapWithMarkers extends Component {
         ]
       });
     }
-    console.log(this.state.markerList); 
+    // console.log(event);
+    // console.log(this.state.markerList);
+
   };
 
   // waiting for origin from input
   // waiting for submit button
-  onPathSubmitted = event => {  
+  async onPathSubmitted (event) {  
     // Generate path using list of markers (nodes)
-    var origin = 'Gavrila Principa 48, Belgrade';
-    var destination = 'Gavrila Principa 48, Belgrade';
+    var origin = 'Fakultet organizacionih nauka, Belgrade';
+    var destination = 'Fakultet organizacionih nauka, Belgrade';
     var waypoints = [];
     
-    console.log(this.state.markerList)
+    // console.log(this.state.markerList)
 
     this.state.markerList.forEach(marker => {
       let val = {
@@ -108,8 +112,8 @@ class MapWithMarkers extends Component {
       }
       waypoints.push(val);
     });
-    console.log('ovde brt')
-    console.log(waypoints);
+    // console.log('ovde brt')
+    // console.log(waypoints);
 
     this.setState({
       routeCreated: {
@@ -121,18 +125,54 @@ class MapWithMarkers extends Component {
       }
     });
 
-    console.log(this.state.routeCreated);
+    // console.log(this.state.routeCreated);
     this.setState({
       directionsIndicator: true
     });
-    console.log(this.state.directionsIndicator);
+    // console.log(this.state.directionsIndicator);
+
+    // console.log(this.state.markerList);
+    let markerListIdsUpdated = [];
+    for (let i = 0; i < this.state.markerList.length; i++) {
+      let key1 = {
+        lat: this.state.markerList[i].lat, 
+        lng: this.state.markerList[i].lng
+      }
+      for (let j = 0; j < this.state.allGarbage.length; j++) {
+        let key2 = {
+          lat: this.state.allGarbage[j].lat, 
+          lng: this.state.allGarbage[j].lng
+        }
+        // console.log(key2)
+        if (key1.lat == key2.lat && key1.lng == key2.lng){
+          // console.log('EQUAL');
+          markerListIdsUpdated.push(this.state.allGarbage[j]._id);
+        }
+      } 
+    } 
+    
+    this.setState({
+      markerListIds: markerListIdsUpdated
+    })
+
+    console.log(this.state.markerListIds);
+
+    const token = sessionStorage.getItem('user-token');
+    let body = {
+      "products": this.state.markerListIds
+    }
+    const markerIds = await axios.post('http://localhost:8090/receivers/claimProducts', body, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
   };
 
   async submitReceiverForm(e) {
     e.preventDefault();
     const token = sessionStorage.getItem('user-token');
     let body = {
-      "productType": ""
+      "productTypes": []
     }
     const garbage = await axios.post('http://localhost:8090/receivers/getOpenProductsByType', body, {
       headers: {
@@ -144,6 +184,10 @@ class MapWithMarkers extends Component {
     this.setState({
       allGarbage: garbage.data
     })
+
+    // this.setState({
+    //   markerInfo: '50kg / \n elektromaterijal',
+    // });
 
     // console.log(this.state.allGarbage);
 
@@ -222,17 +266,20 @@ class MapWithMarkers extends Component {
                 this.state.allGarbage.map((product) => 
                   {
                     const keyll = `${product.lat} ${product.lng}`;
+                    const title = `${product.productType}/${product.productQuantity}kg`
                     return (
                       <Marker {...product}
                         key={keyll}
+                        opacity={0.7}
                         position={{lat: product.lat, lng: product.lng}}
                         onClick={this.onMarkerClicked}
+                        label={title}
                       />
                     )
                   }
                 )
-                
               }
+
               <Directions
               optimalRouteDDD={this.state.routeCreated}/>
             </GoogleMap>
@@ -295,11 +342,14 @@ class MapWithMarkers extends Component {
               this.state.allGarbage.map((product) => 
                 {
                   const keyll = `${product.lat} ${product.lng}`;
+                  const title = `${product.productType}/${product.productQuantity}kg`
                   return (
                     <Marker {...product}
                       key={keyll}
+                      opacity={1}
                       position={{lat: product.lat, lng: product.lng}}
                       onClick={this.onMarkerClicked}
+                      label={title}
                     />
                   )
                 }
