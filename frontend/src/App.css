@@ -47,3 +47,12 @@
 .list-items-giver {
   border-bottom: 1px solid #75c46b;
 }
+
+header div {
+  border-bottom: 1px solid #75c46b;
+  padding-bottom: 7px;
+}
+
+body {
+  background-color:#DCF8C6;
+}

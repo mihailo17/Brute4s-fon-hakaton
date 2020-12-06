@@ -62,8 +62,9 @@ class MapGiver extends Component {
       if(this.state.marker){
         return (
           <>
-          <h3>Izaberite lokaciju preuzimanja:</h3>
-          <button onClick={this.submitForm} className="btn btn-primary" type="submit" value="Posalji">Posalji</button>
+          <button onClick={this.submitForm} className="btn btn-success" type="submit" value="Posalji">Posalji</button>
+          <h3 className="mt-5 mb-5">Izaberite lokaciju preuzimanja:</h3>
+          
           <div className="map">
             <LoadScript
               googleMapsApiKey="AIzaSyAMBqfNf9HiDaVKKMilXtupWqc4sWebse4"

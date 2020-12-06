@@ -74,7 +74,8 @@ export default class Giver extends Component{
         })
       }
 
-        <h3 className="mt-4">Prijavi otpad za sakupljanje:</h3>
+        <h3 className="mt-4 mb-4">Prijavi otpad za sakupljanje:</h3>
+        
         <form onSubmit={this.submitGiverForm} id="giver-submit-form">
   
           <div className="form-group">
@@ -89,7 +90,7 @@ export default class Giver extends Component{
           <div className="form-group mb-3">
             <label htmlFor="quantity">Kolicina u kilogramima</label>
             <br></br>
-            <input  onChange={this.handleChangeQuantity}  className="form-control" type="number" name="product-quantity" id="product-quantity"></input>
+            <input onChange={this.handleChangeQuantity}  className="form-control" type="number" name="product-quantity" id="product-quantity"></input>
           </div>
 
         </form>
