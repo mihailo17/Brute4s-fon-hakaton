@@ -3,7 +3,6 @@
 }
 .logo {
   height: 50px;
-  width: 50px;
 }
 .App-logo {
   height: 40vmin;
@@ -42,4 +41,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+/* Custom css */
+
+.list-items-giver {
+  border-bottom: 1px solid #75c46b;
 }

@@ -56,7 +56,7 @@ export default class Giver extends Component{
     return (
 
       <div className="container">
-        <h2>Lista: </h2>
+        <h3 className="mb-4">Lista prijavljenih predaja materijala: </h3>
       {
         this.state.usersGarbage.map(item => {
       return(
@@ -74,7 +74,7 @@ export default class Giver extends Component{
         })
       }
 
-        <h2>Prijavi otpad za sakupljanje:</h2>
+        <h3 className="mt-4">Prijavi otpad za sakupljanje:</h3>
         <form onSubmit={this.submitGiverForm} id="giver-submit-form">
   
           <div className="form-group">
@@ -93,7 +93,7 @@ export default class Giver extends Component{
           </div>
 
         </form>
-
+      
         <MapGiver 
           productQuantity={this.state.productQuantity}
           productType={this.state.productType}

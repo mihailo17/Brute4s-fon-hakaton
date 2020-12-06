@@ -3,22 +3,15 @@ import axios from 'axios';
 
 import { GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 
-
 const containerStyle = {
   width: '100%',
   height: '300px'
 };
 
-// Map starting center point
 const center = {
   lat: 44.77328254755136, 
   lng: 20.475249457670806
 };
-  
-// Path nodes
-// var markerList = {};
-// var routeCreated = {}
-
 
 class MapGiver extends Component {
   
@@ -51,7 +44,6 @@ class MapGiver extends Component {
       }
     },
     );
-    console.log(response)
   }
 
   onMapClick = event => {
@@ -64,16 +56,13 @@ class MapGiver extends Component {
           } 
       }
     });
-    
-    //console.log(this.state.marker);
-    // console.log(this.context);
   };
 
   render () {
       if(this.state.marker){
         return (
           <>
-          <h3></h3>
+          <h3>Izaberite lokaciju preuzimanja:</h3>
           <button onClick={this.submitForm} className="btn btn-primary" type="submit" value="Posalji">Posalji</button>
           <div className="map">
             <LoadScript
@@ -85,11 +74,11 @@ class MapGiver extends Component {
                 zoom={12}
                 onClick={this.onMapClick}
               >
-                { /* Child components, such as markers, info windows, etc. */ 
-                    <Marker
-                        position = {this.state.marker.position}
-                    >
-                    </Marker>
+                { 
+                  <Marker
+                      position = {this.state.marker.position}
+                  >
+                  </Marker>
                 }
               </GoogleMap>
             </LoadScript>
@@ -107,15 +96,10 @@ class MapGiver extends Component {
                 zoom={12}
                 onClick={this.onMapClick}
               >
-                { /* Child components, such as markers, info windows, etc. */ 
-                }
               </GoogleMap>
             </LoadScript>
           )
-
       }
-      
-    }
+  }
 }
- 
 export default MapGiver;
