@@ -3,6 +3,7 @@ import Directions from '../Directions'
 
 
 import { GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
+import axios from 'axios';
 
 
 const containerStyle = {
@@ -16,10 +17,6 @@ const center = {
   lng: 20.475249457670806
 };
   
-// Path nodes
-// var markerList = {};
-// var routeCreated = {}
-
 
 class MapWithMarkers extends Component {
   
@@ -31,11 +28,13 @@ class MapWithMarkers extends Component {
       markerList: [],
       routeCreated: [],
       directionsIndicator: false,
+      allGarbage: []
     };
     
     this.onMapClick = this.onMapClick.bind(this)
     this.onMarkerClicked = this.onMarkerClicked.bind(this)
     this.onPathSubmitted = this.onPathSubmitted.bind(this)
+    this.submitReceiverForm = this.submitReceiverForm.bind(this)
   }
 
   onMapClick = event => {
@@ -56,10 +55,28 @@ class MapWithMarkers extends Component {
 
   onMarkerClicked = event => {  
     // Enable/Disable markers for path creation
-    var key = event.latLng.lat() + " " + event.latLng.lng();
+    let cond = false;
 
-    if(key in this.state.markerList){
-      delete this.state.markerList[key];
+    this.state.markerList.forEach(elem => {
+      if (elem.lat == event.latLng.lat() && elem.lng == event.latLng.lng()){
+        cond = true;
+      }
+    });
+
+    let key = {
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng()
+    }
+    // console.log(key)
+
+    if(cond){
+      const updatedMarkerList = this.state.markerList.filter(disclaimedProd => {
+        if(!(disclaimedProd.lat == key.lat && disclaimedProd.lng == key.lng))
+          return true;
+      });
+      this.setState({
+        markerList: updatedMarkerList
+      });
     } else {
       this.setState({
         markerList: [
@@ -71,7 +88,7 @@ class MapWithMarkers extends Component {
         ]
       });
     }
-    // console.log(this.state.markerList); 
+    console.log(this.state.markerList); 
   };
 
   // waiting for origin from input
@@ -79,7 +96,10 @@ class MapWithMarkers extends Component {
   onPathSubmitted = event => {  
     // Generate path using list of markers (nodes)
     var origin = 'Gavrila Principa 48, Belgrade';
+    var destination = 'Gavrila Principa 48, Belgrade';
     var waypoints = [];
+    
+    console.log(this.state.markerList)
 
     this.state.markerList.forEach(marker => {
       let val = {
@@ -91,61 +111,167 @@ class MapWithMarkers extends Component {
     console.log('ovde brt')
     console.log(waypoints);
 
-    // var routeCreated = {
-    //   origin: origin,
-    //   destination: origin,
-    //   waypoints: waypoints,
-    //   travelMode: 'DRIVING',
-    //   optimizeWaypoints: true,
-    // };
-
     this.setState({
       routeCreated: {
         origin: origin,
-        destination: origin,
+        destination: destination,
         waypoints: waypoints,
         travelMode: 'DRIVING',
         optimizeWaypoints: true,
       }
     });
 
-    // console.log(this.state.routeCreated);
+    console.log(this.state.routeCreated);
     this.setState({
       directionsIndicator: true
     });
     console.log(this.state.directionsIndicator);
   };
 
+  async submitReceiverForm(e) {
+    e.preventDefault();
+    const token = sessionStorage.getItem('user-token');
+    let body = {
+      "productType": ""
+    }
+    const garbage = await axios.post('http://localhost:8090/receivers/getOpenProductsByType', body, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+
+    // console.log(garbage.data);
+    this.setState({
+      allGarbage: garbage.data
+    })
+
+    // console.log(this.state.allGarbage);
+
+    // renderMarkers();
+  }
+
   render () {
+    const style = {
+      maxWidth: "100%",
+      height: "550px",
+      overflowX: "hidden",
+      overflowY: "hidden"
+    };
+    const containerStyle = {
+      maxWidth: "100%",
+      height: "550px"
+    };
+
     if (this.state.directionsIndicator){
       return (
-        <LoadScript
-          googleMapsApiKey="AIzaSyAMBqfNf9HiDaVKKMilXtupWqc4sWebse4"
-        >
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={12}
-            onClick={this.onMapClick}
-            onRightClick={this.onPathSubmitted}
+        <div>
+          <div className="container">
+            <h2>Filtriraj rezultate:</h2>
+            <h3>Sirovine</h3>
+            <form onSubmit={this.submitReceiverForm} id="filter-materials">
+              <div className="form-group">
+                <input type="checkbox" id="metal" name="metal" value="metal"></input>
+                <label htmlFor="metal">Metal</label>
+              </div>
+              <div className="form-group">
+                <input type="checkbox" id="staklo" name="staklo" value="staklo"></input>
+                <label htmlFor="staklo">Staklo</label>
+              </div>
+              <div className="form-group">
+                <input type="checkbox" id="papir" name="papir" value="papir"></input>
+                <label htmlFor="papir">Papir</label>
+              </div>
+              <div className="form-group">
+                <input type="checkbox" id="plastika" name="plastika" value="plastika"></input>
+                <label htmlFor="plastika">Plastika</label>
+              </div>
+              <input className="btn btn-primary" type="submit" value="Primeni"></input>
+            </form>
+            
+            <div className="giver-locations">
+              <h2>Lokacije sa donatorima sirovina: </h2>
+              <h3>Oznacite lokacije sa kojih zelite da sakupite: </h3>
+              <input type="submit" value="Potvrdi"></input>
+              <div> Div sa mapom:</div>
+            </div>
+
+          </div>
+      
+          <LoadScript
+            googleMapsApiKey="AIzaSyAMBqfNf9HiDaVKKMilXtupWqc4sWebse4"
           >
-            { /* Child components, such as markers, info windows, etc. */ 
-              this.state.markers.map((marker) => (
-                <Marker
-                  key={marker.time.toISOString()}
-                  position={{lat: marker.lat, lng: marker.lng}}
-                  onClick={this.onMarkerClicked}
-                >
-                </Marker>
-            ))
-            }
-            <Directions
-            optimalRouteDDD={this.state.routeCreated}/>
-          </GoogleMap>
-        </LoadScript>
+            <GoogleMap
+              mapContainerStyle={containerStyle}
+              center={center}
+              zoom={12}
+              style={style}
+              containerStyle={containerStyle}
+              onClick={this.onMapClick}
+              onRightClick={this.onPathSubmitted}
+            >
+              { /* Child components, such as markers, info windows, etc. */ 
+                // this.state.markers.map((marker) => (
+                //   <Marker
+                //     key={marker.time.toISOString()}
+                //     position={{lat: marker.lat, lng: marker.lng}}
+                //     onClick={this.onMarkerClicked}
+                //   >
+                //   </Marker>
+                // ))
+
+                this.state.allGarbage.map((product) => 
+                  {
+                    const keyll = `${product.lat} ${product.lng}`;
+                    return (
+                      <Marker {...product}
+                        key={keyll}
+                        position={{lat: product.lat, lng: product.lng}}
+                        onClick={this.onMarkerClicked}
+                      />
+                    )
+                  }
+                )
+                
+              }
+              <Directions
+              optimalRouteDDD={this.state.routeCreated}/>
+            </GoogleMap>
+          </LoadScript>
+        </div>
       )
     } else {
       return (
+        <div>
+          <div className="container">
+            <h2>Filtriraj rezultate:</h2>
+            <h3>Sirovine</h3>
+            <form onSubmit={this.submitReceiverForm} id="filter-materials">
+              <div className="form-group">
+                <input type="checkbox" id="metal" name="metal" value="metal"></input>
+                <label htmlFor="metal">Metal</label>
+              </div>
+              <div className="form-group">
+                <input type="checkbox" id="staklo" name="staklo" value="staklo"></input>
+                <label htmlFor="staklo">Staklo</label>
+              </div>
+              <div className="form-group">
+                <input type="checkbox" id="papir" name="papir" value="papir"></input>
+                <label htmlFor="papir">Papir</label>
+              </div>
+              <div className="form-group">
+                <input type="checkbox" id="plastika" name="plastika" value="plastika"></input>
+                <label htmlFor="plastika">Plastika</label>
+              </div>
+              <input className="btn btn-primary" type="submit" value="Primeni"></input>
+            </form>
+            
+            <div className="giver-locations">
+              <h2>Lokacije sa donatorima sirovina: </h2>
+              <h3>Oznacite lokacije sa kojih zelite da sakupite: </h3>
+              <input type="submit" value="Potvrdi"></input>
+              <div> Div sa mapom:</div>
+            </div>
+          </div>
         <LoadScript
           googleMapsApiKey="AIzaSyAMBqfNf9HiDaVKKMilXtupWqc4sWebse4"
         >
@@ -157,17 +283,32 @@ class MapWithMarkers extends Component {
             onRightClick={this.onPathSubmitted}
           >
             { /* Child components, such as markers, info windows, etc. */ 
-              this.state.markers.map((marker) => (
-                <Marker
-                  key={marker.time.toISOString()}
-                  position={{lat: marker.lat, lng: marker.lng}}
-                  onClick={this.onMarkerClicked}
-                >
-                </Marker>
-            ))
+              // this.state.markers.map((marker) => (
+              //   <Marker
+              //     key={marker.time.toISOString()}
+              //     position={{lat: marker.lat, lng: marker.lng}}
+              //     onClick={this.onMarkerClicked}
+              //   >
+              //   </Marker>
+              // ))
+
+              this.state.allGarbage.map((product) => 
+                {
+                  const keyll = `${product.lat} ${product.lng}`;
+                  return (
+                    <Marker {...product}
+                      key={keyll}
+                      position={{lat: product.lat, lng: product.lng}}
+                      onClick={this.onMarkerClicked}
+                    />
+                  )
+                }
+              )
+            
             }
           </GoogleMap>
         </LoadScript>
+      </div>
       )
     }
     

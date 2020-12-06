@@ -19,7 +19,7 @@ function App() {
     <Router>
       <Route path="/" exact component={Homepage}/>
       <Route path="/giver" component={Giver}/>
-      <Route path="/receiver" component={Receiver}/>
+      <Route path="/receiver" component={MapWithMarkers}/>
       <Route path="/register" component={Register}/>
       <Route path="/pathfinding" component={MapWithMarkers}/>
       <Route path="/mapgiver" component={MapGiver}/>
