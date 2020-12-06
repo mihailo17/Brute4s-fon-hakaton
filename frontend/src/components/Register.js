@@ -16,9 +16,7 @@ async function submitRegisterForm(e){
     }
     else {
       // ovde preusmerim na receiver stranicu http://localhost:8090/receivers
-      console.log("pre axiosa");
       const response = await axios.post("http://localhost:8090/receivers", {email, password});
-      console.log("saas");
       sessionStorage.setItem("user-token", response.data.token)
       window.location.href = "/receiver";
     }
