@@ -266,14 +266,14 @@ class MapWithMarkers extends Component {
                 this.state.allGarbage.map((product) => 
                   {
                     const keyll = `${product.lat} ${product.lng}`;
-                    
+                    const title = `${product.productType}/${product.productQuantity}kg`
                     return (
                       <Marker {...product}
                         key={keyll}
                         opacity={0.7}
                         position={{lat: product.lat, lng: product.lng}}
                         onClick={this.onMarkerClicked}
-                        label={this.state.markerInfo}
+                        label={title}
                       />
                     )
                   }
@@ -342,7 +342,7 @@ class MapWithMarkers extends Component {
               this.state.allGarbage.map((product) => 
                 {
                   const keyll = `${product.lat} ${product.lng}`;
-                  const title = `${product.productType}/${product.productQuantity}kg / ${product._id}`
+                  const title = `${product.productType}/${product.productQuantity}kg`
                   return (
                     <Marker {...product}
                       key={keyll}
