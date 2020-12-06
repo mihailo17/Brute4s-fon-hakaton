@@ -1,50 +1,62 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import GarbageItem from './GarbageItem';
-
+import MapGiver from './MapGiver';
 
 export default class Giver extends Component{
   constructor(props) {
     super(props);
     this.state = {
       usersGarbage: [],
+      token: "",
+      productQuantity: 0,
+      productType: ""
     }
+    this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
+    this.handleChangeType = this.handleChangeType.bind(this);
   }
-  
-    
-  async componentDidMount() {
-      
-    const token = sessionStorage.getItem("user-token");
-    
-    const response = await axios.get("http://localhost:8090/givers/getMyProducts", { 
-      headers: { 
-          'Authorization': `Bearer ${token}`
-      }
-    });
-    const garbage = response.data;
+  handleChangeQuantity() {
+    const productQuantitySelectValue = document.getElementById("product-quantity").value;
     this.setState({
-      usersGarbage: garbage,
+      productQuantity: productQuantitySelectValue
     })
-    this.forceUpdate();   
     
   }
 
-  async submitGiverForm(event) {
-    const materialQuality = document.getElementById("materialQuality").value;
-    const materialQuantity = document.getElementById("quantity").value
-    event.preventDefault();
-    
-    const response = await axios.post("http://localhost:8090/givers", );
-    
+  handleChangeType(){
+    const productTypeValue = document.getElementById("product-type").value;
+    this.setState({
+      productType: productTypeValue
+    })
+   
   }
-  
-  render(){
+  async componentDidMount() {
+      
+    const token1 = sessionStorage.getItem("user-token");
+          
+    const response = await axios.get("http://localhost:8090/givers/getMyProducts", { 
+      headers: { 
+          'Authorization': `Bearer ${token1}`
+      }
+    });
     
+    this.setState({
+      token: token1
+    })
+
+    const garbage = response.data;
+    
+    this.setState({
+      usersGarbage: garbage,
+    })
+    this.forceUpdate();    
+  }
+
+  render(){
     return (
 
       <div className="container">
         <h2>Lista: </h2>
-        
       {
         this.state.usersGarbage.map(item => {
       return(
@@ -65,7 +77,7 @@ export default class Giver extends Component{
         <form onSubmit={this.submitGiverForm} id="giver-submit-form">
   
           <div className="form-group">
-          <select name="material-quality" id="material-quality">
+          <select onChange={this.handleChangeType} className="form-control" name="product-type" id="product-type">
             <option value="metal">Metal</option>
             <option value="plastika">Plastika</option>
             <option value="staklo">Staklo</option>
@@ -76,11 +88,16 @@ export default class Giver extends Component{
           <div className="form-group mb-3">
             <label htmlFor="quantity">Kolicina u kilogramima</label>
             <br></br>
-            <input className="form-control" type="number" name="quantity" id="quantity"></input>
+            <input  onChange={this.handleChangeQuantity}  className="form-control" type="number" name="product-quantity" id="product-quantity"></input>
           </div>
-              
-          <input className="btn btn-primary" type="submit" value="Posalji"></input>
         </form>
+
+        <MapGiver 
+        productQuantity={this.state.productQuantity}
+        productType={this.state.productType}
+        token={this.state.token}
+        >
+        </MapGiver>
       </div>
       )
      }

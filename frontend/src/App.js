@@ -1,6 +1,5 @@
 import React from 'react'
 import './App.css';
-//import Directions from './components/Directions'
 import Giver from './components/Giver'
 import Header from './components/Header'
 import Homepage from './components/Homepage'
