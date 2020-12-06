@@ -9,6 +9,7 @@ import Register from './components/Register'
 import Login from './components/Login'
 import {Route, BrowserRouter as Router} from "react-router-dom"
 import MapWithMarkers from './components/MapWithMarkers';
+import MapGiver from './components/MapGiver';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Route path="/receiver" component={Receiver}/>
       <Route path="/register" component={Register}/>
       <Route path="/pathfinding" component={MapWithMarkers}/>
+      <Route path="/mapgiver" component={MapGiver}/>
     </Router>
     </>
   )
