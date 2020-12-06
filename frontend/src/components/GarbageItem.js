@@ -15,7 +15,8 @@ class GarbageItem extends React.Component{
     return (
       <li>
         <span>{this.state.productType}</span>
-        assaasas
+        <span>{this.state.productQuantity}</span> 
+        <span>{this.state.stateOfProduct}</span> 
       </li>
       
     )}

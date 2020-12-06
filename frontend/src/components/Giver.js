@@ -10,25 +10,27 @@ export default class Giver extends Component{
     }
   }
   async componentDidMount() {
-    const garbage = await this.getAllUsersGarbage();
-    this.setState({
-      usersGarbage: garbage,
-    })
-    console.log(this.state.usersGarbage);
-  }
-  
-  async getAllUsersGarbage() {
+    
     const token = sessionStorage.getItem("user-token");
+    
     const response = await axios.get("http://localhost:8090/givers/getMyProducts", { 
       headers: { 
           'Authorization': `Bearer ${token}`
       }
     });
-    return response.data;
+    const garbage = response.data;
+    this.setState({
+      usersGarbage: garbage,
+    })
+    console.log(this.state.usersGarbage);
+    this.forceUpdate();    
   }
 
-  submitGiverForm(event) {
+  async submitGiverForm(event) {
+    const radio = document.querySelectorAll('[name="radio"]');
     event.preventDefault();
+    const response = await axios.post("http://localhost:8090/givers",);
+
   }
   
   render(){
@@ -40,48 +42,49 @@ export default class Giver extends Component{
         
       {
         this.state.usersGarbage.map(item => {
-          <span>{item}</span>
-          
-          // <GarbageItem 
-          //   productType={item.productType} 
-          //   stateOfProduct={item.stateOfProduct}
-          //   lat={item.lat}
-          //   lng={item.lng}
-          //   quantity={item.quantity}
-          //   >
-          // </GarbageItem>
+      return(
+      
+      <GarbageItem 
+        productType={item.productType} 
+        stateOfProduct={item.stateOfProduct}
+        lat={item.lat}
+        lng={item.lng}
+        quantity={item.quantity}
+        key={item._id}
+        >
+      </GarbageItem>)
         })
       }
 
         <h2>Prijavi otpad za sakupljanje:</h2>
         <form onSubmit={this.submitGiverForm} id="giver-submit-form">
           
-          {/* <div className="form-group mb-3">
+          <div className="form-group mb-3">
             <label htmlFor="adresa">Adresa predaje: </label>
             <br></br>
             <input className="form-control-lg" type="text" name="adresa" id="adresa"></input>
-          </div>      */}
+          </div>     
   
           <div className="form-group"></div>
   
-          <div className="custom-control custom-checkbox mb-1">
-            <input className="custom-control-input" type="checkbox" id="metal" name="metal" value="metal"></input>
-            <label className="custom-control-label" htmlFor="metal">Metal</label>
+          <div className="mb-1">
+            <input className="" type="radio" id="metal" name="radio" value="metal"></input>
+            <label className="" htmlFor="metal">Metal</label>
+          </div>
+          
+          <div className="mb-1">
+            <input className="" type="radio" id="staklo" name="radio" value="staklo"></input>
+            <label className="" htmlFor="staklo">Staklo</label>
           </div>
           
           <div className="custom-control custom-checkbox mb-1">
-            <input className="custom-control-input" type="checkbox" id="staklo" name="staklo" value="staklo"></input>
-            <label className="custom-control-label" htmlFor="staklo">Staklo</label>
+            <input className="" type="radio" id="papir" name="radio" value="papir"></input>
+            <label className="" htmlFor="papir">Papir</label>
           </div>
           
-          <div className="custom-control custom-checkbox mb-1">
-            <input className="custom-control-input" type="checkbox" id="papir" name="papir" value="papir"></input>
-            <label className="custom-control-label" htmlFor="papir">Papir</label>
-          </div>
-          
-          <div className="custom-control custom-checkbox mb-1">
-            <input className="custom-control-input" type="checkbox" id="plastika" name="plastika" value="plastika"></input>
-            <label className="custom-control-label" htmlFor="plastika">Plastika</label>
+          <div className="mb-1">
+            <input className="" type="radio" id="plastika" name="radio" value="plastika"></input>
+            <label className="" htmlFor="plastika">Plastika</label>
           </div>
           
           <div className="form-group mb-3">
