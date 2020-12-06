@@ -50,8 +50,11 @@ class GarbageItem extends React.Component{
     if (this.state.stateOfProduct === "claimed") {
       return (
         <div className="rounded p-1 list-items-giver">
-          <p className="mb-2">
-            {this.state.productType} 
+          <p className="mb-0">
+            <span>{this.state.productType}</span>
+            <span>{this.state.stateOfProduct}</span>
+            {this.state.stateOfProduct}
+            <span>{this.state.quantity} </span>
             <button className="btn btn-success ml-5 btn-sm" onClick={this.handleCollected}>Pokupljeno</button>
             <button className="btn btn-danger ml-2 btn-sm" onClick={this.handleNonCollected}>Nije pokupljeno</button></p>
         </div>

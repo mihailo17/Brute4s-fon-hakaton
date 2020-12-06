@@ -34,7 +34,6 @@ export default function Receiver() {
         <h2>Lokacije sa donatorima sirovina: </h2>
         <h3>Oznacite lokacije sa kojih zelite da sakupite: </h3>
         <input type="submit" value="Potvrdi"></input>
-        <div> Div sa mapom:</div>
       </div>
 
     </div>
