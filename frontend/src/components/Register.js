@@ -11,11 +11,16 @@ async function submitRegisterForm(e){
    
     if (selectUserType === "giver") {
       const response = await axios.post("http://localhost:8090/givers", {email, password});
-      console.log(response)
-      // sacuvam token iz responsa i da ulogujem usera i preusmerim na giver stranicu
+      sessionStorage.setItem("user-token", response.data.token)
+      window.location.href = "/giver";
     }
     else {
       // ovde preusmerim na receiver stranicu http://localhost:8090/receivers
+      console.log("pre axiosa");
+      const response = await axios.post("http://localhost:8090/receivers", {email, password});
+      console.log("saas");
+      sessionStorage.setItem("user-token", response.data.token)
+      window.location.href = "/receiver";
     }
     
   } catch (error) {
@@ -25,29 +30,30 @@ async function submitRegisterForm(e){
 
 export default function Register() {
   return (
-    <form onSubmit={submitRegisterForm} id="register-form">
-      <div className="form-group"> 
-        <label htmlFor="select-user-type">Izaberi tip korisnika:</label>
-        <select id="select-user-type" name="select-user-type">
-          <option value="giver">Donator</option>
-          <option value="receiver">Sakupljac</option>
-        </select>
-      </div>
-      
-      <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" id="email"></input>
-      </div>
-      
-      <div className="form-group">
-        <label htmlFor="password">Sifra</label>
-        <input name="password" id="password" type="password"></input>
-      </div>
-      
-      <div className="form-group">
-        <input type="submit" value="Registruj se"></input>
-      </div>
-    </form>
-    
+    <div className="container">
+      <form onSubmit={submitRegisterForm} id="register-form">
+        <div className="form-group"> 
+          <label htmlFor="select-user-type">Izaberi tip korisnika:</label>
+          <select className="custom-select mb lg-3" id="select-user-type" name="select-user-type">
+            <option value="giver">Donator</option>
+            <option value="receiver">Sakupljac</option>
+          </select>
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input type="email" name="email" id="email"></input>
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="password">Sifra</label>
+          <input name="password" id="password" type="password"></input>
+        </div>
+        
+        <div className="form-group">
+          <input className="btn btn-primary" type="submit" value="Registruj se"></input>
+        </div>
+      </form>
+    </div>
   )
 }
