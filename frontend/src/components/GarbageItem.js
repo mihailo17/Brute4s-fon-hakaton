@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'
 
 class GarbageItem extends React.Component{
   constructor(props){
@@ -8,17 +9,56 @@ class GarbageItem extends React.Component{
       lng: this.props.lng,
       productType: this.props.productType,
       productQuantity: this.props.productQuantity,
-      stateOfProduct: this.props.stateOfProduct
+      stateOfProduct: this.props.stateOfProduct, 
+      productId: this.props._id
     }
+    this.handleCollected = this.handleCollected.bind(this);
+    this.handleNonCollected = this.handleNonCollected.bind(this);
+  }
+  
+  handleCollected(){
+    const res = axios.patch("http://localhost:8090/givers/resolveProduct", {
+      "productId" : this.state._id,
+      "stateOfProduct": "closed"
+    }, { 
+      headers: { 
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNjZWI0NDg1ZDlkMDc3ZGY4OGMyM2MiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjY1MDkyfQ.VFlpXIhl9q1Tf894E7c4XDTEr4mabpvYxLin5GNgPlc`
+      }
+    });
+  }
+  handleNonCollected(){
+    const res = axios.patch("http://localhost:8090/givers/resolveProduct", {
+      "productId" : this.state._id,
+      "stateOfProduct": "open"
+    }, { 
+      headers: { 
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNjZWI0NDg1ZDlkMDc3ZGY4OGMyM2MiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjY1MDkyfQ.VFlpXIhl9q1Tf894E7c4XDTEr4mabpvYxLin5GNgPlc`
+      }
+    });
   }
   render(){
-    return (
-      <li>
-        <span>{this.state.productType}</span>
-        <span>{this.state.productQuantity}</span> 
-        <span>{this.state.stateOfProduct}</span> 
-      </li>
-      
-    )}
+    
+    if (this.state.stateOfProduct === "claimed") {
+      return (
+        <li>
+          <span>{this.state.productType}</span>
+          <span>{this.state.productQuantity}</span> 
+          <span>{this.state.stateOfProduct}</span>
+          <button className="success" onClick={this.handleCollected}>Pokupljeno</button>
+          <button className="danger" onClick={this.handleNonCollected}>Nije pokupljeno</button>
+        </li>
+      )
+    }
+    else {
+      return (
+        <li>
+          <span>{this.state.productType}</span>
+          <span>{this.state.productQuantity}</span> 
+          <span>{this.state.stateOfProduct}</span>
+        </li>
+      )
+    }
+
+    }
 }
 export default GarbageItem;

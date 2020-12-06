@@ -37,21 +37,21 @@ class MapGiver extends Component {
   }
   async submitForm() {
     
-    // const response = await axios.post("http://localhost:8090/givers/addProduct", 
-    // {
-    // "productType": this.state.productType,
-    // "productQuantity": this.state.productQuantity,
-    // "lat": this.state.marker.position.lat,
-    // "lng": this.state.marker.position.lng,
-    // "stateOfProduct": "open"
-    // },
-    // {
-    //   headers: {
-    //     "Authorization": `Bearer ${this.state.token}`
-    //   }
-    // },
-    // );
-    // console.log(response)
+    const response = await axios.post("http://localhost:8090/givers/addProduct", 
+    {
+    "productType": "Plastika",
+    "productQuantity": this.state.productQuantity,
+    "lat": this.state.marker.position.lat,
+    "lng": this.state.marker.position.lng,
+    "stateOfProduct": "open"
+    },
+    {
+      headers: {
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNjZTRhNjIyYWFkMDcxNDM3NDA4MTAiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjYzMzk4fQ.Y67m5Qo7pK1yJJbOTLwvP1ScyHAr6dL2VMqTU9bSpq0`
+      }
+    },
+    );
+    console.log(response)
   }
 
   onMapClick = event => {
@@ -73,6 +73,7 @@ class MapGiver extends Component {
       if(this.state.marker){
         return (
           <>
+          <h3></h3>
           <button onClick={this.submitForm} className="btn btn-primary" type="submit" value="Posalji">Posalji</button>
           <div className="map">
             <LoadScript

@@ -32,7 +32,7 @@ export default class Giver extends Component{
   }
   async componentDidMount() {
       
-    const token1 = sessionStorage.getItem("user-token");
+    const token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNjZWI0NDg1ZDlkMDc3ZGY4OGMyM2MiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjY1MDkyfQ.VFlpXIhl9q1Tf894E7c4XDTEr4mabpvYxLin5GNgPlc";
           
     const response = await axios.get("http://localhost:8090/givers/getMyProducts", { 
       headers: { 
@@ -68,6 +68,7 @@ export default class Giver extends Component{
         lng={item.lng}
         quantity={item.quantity}
         key={item._id}
+
         >
       </GarbageItem>)
         })
@@ -90,13 +91,14 @@ export default class Giver extends Component{
             <br></br>
             <input  onChange={this.handleChangeQuantity}  className="form-control" type="number" name="product-quantity" id="product-quantity"></input>
           </div>
+
         </form>
 
         <MapGiver 
-        productQuantity={this.state.productQuantity}
-        productType={this.state.productType}
-        token={this.state.token}
-        >
+          productQuantity={this.state.productQuantity}
+          productType={this.state.productType}
+          token={this.state.token}
+          >
         </MapGiver>
       </div>
       )
