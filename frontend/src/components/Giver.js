@@ -10,7 +10,8 @@ export default class Giver extends Component{
       usersGarbage: [],
       token: "",
       productQuantity: 0,
-      productType: ""
+      productType: "",
+      key: ""
     }
     this.handleChangeQuantity = this.handleChangeQuantity.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
@@ -58,7 +59,7 @@ export default class Giver extends Component{
       <div className="container">
         <h2>Lista: </h2>
       {
-        this.state.usersGarbage.map(item => {
+        this.state.usersGarbage.map((item, i) => {
       return(
       
       <GarbageItem 
@@ -67,7 +68,8 @@ export default class Giver extends Component{
         lat={item.lat}
         lng={item.lng}
         quantity={item.quantity}
-        key={item._id}
+        key={i}
+        idUsera={item._id}
 
         >
       </GarbageItem>)
@@ -98,6 +100,7 @@ export default class Giver extends Component{
           productQuantity={this.state.productQuantity}
           productType={this.state.productType}
           token={this.state.token}
+          productId={this.state._id}
           >
         </MapGiver>
       </div>

@@ -10,31 +10,40 @@ class GarbageItem extends React.Component{
       productType: this.props.productType,
       productQuantity: this.props.productQuantity,
       stateOfProduct: this.props.stateOfProduct, 
-      productId: this.props._id
+      idUsera: this.props.idUsera,
+      key: this.props.key
     }
     this.handleCollected = this.handleCollected.bind(this);
     this.handleNonCollected = this.handleNonCollected.bind(this);
   }
   
-  handleCollected(){
-    const res = axios.patch("http://localhost:8090/givers/resolveProduct", {
-      "productId" : this.state._id,
+  async handleCollected(){
+    try {
+    const res = await axios.patch("http://localhost:8090/givers/resolveProduct", {
+      "productId" : this.state.idUsera,
       "stateOfProduct": "closed"
     }, { 
       headers: { 
           'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNjZWI0NDg1ZDlkMDc3ZGY4OGMyM2MiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjY1MDkyfQ.VFlpXIhl9q1Tf894E7c4XDTEr4mabpvYxLin5GNgPlc`
       }
     });
+  } catch (error) {
+    console.log(error);
   }
-  handleNonCollected(){
-    const res = axios.patch("http://localhost:8090/givers/resolveProduct", {
-      "productId" : this.state._id,
+  }
+  async handleNonCollected(){
+    try {
+    const res = await axios.patch("http://localhost:8090/givers/resolveProduct", {
+      "productId" : this.state.idUsera,
       "stateOfProduct": "open"
     }, { 
       headers: { 
           'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNjZWI0NDg1ZDlkMDc3ZGY4OGMyM2MiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjY1MDkyfQ.VFlpXIhl9q1Tf894E7c4XDTEr4mabpvYxLin5GNgPlc`
       }
     });
+  } catch (error) {
+    console.log(error);
+  }
   }
   render(){
     

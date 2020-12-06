@@ -1,6 +1,7 @@
 const Product = require('../models/product.js');
 
 const resolveProduct = async (req, res) => {
+  console.log(req.body);
   try {
     let newProduct = await Product.findOne({_id: req.body.productId, giverThatGives: req.giver._id });
 
