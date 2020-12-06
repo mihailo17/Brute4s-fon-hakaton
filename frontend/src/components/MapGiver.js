@@ -29,18 +29,19 @@ class MapGiver extends Component {
     this.submitForm = this.submitForm.bind(this)
   }
   async submitForm() {
+    console.log('Uslo');
     
     const response = await axios.post("http://localhost:8090/givers/addProduct", 
     {
     "productType": "Plastika",
-    "productQuantity": this.state.productQuantity,
+    "productQuantity": 250,
     "lat": this.state.marker.position.lat,
     "lng": this.state.marker.position.lng,
     "stateOfProduct": "open"
     },
     {
       headers: {
-        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNjZTRhNjIyYWFkMDcxNDM3NDA4MTAiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjYzMzk4fQ.Y67m5Qo7pK1yJJbOTLwvP1ScyHAr6dL2VMqTU9bSpq0`
+        "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNkMDg4NjdiNTVmNTBiMGZjMjFiNjQiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjcyNTgyfQ.501Yks3GfqD8f9TkaOdUFNEzZ_PHELx4bOEh-NsPPBM`
       }
     },
     );
@@ -96,6 +97,10 @@ class MapGiver extends Component {
                 zoom={12}
                 onClick={this.onMapClick}
               >
+
+                { /* Child components, such as markers, info windows, etc. */ 
+
+                }
               </GoogleMap>
             </LoadScript>
           )

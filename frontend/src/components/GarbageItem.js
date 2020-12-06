@@ -24,7 +24,7 @@ class GarbageItem extends React.Component{
       "stateOfProduct": "closed"
     }, { 
       headers: { 
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNjZWI0NDg1ZDlkMDc3ZGY4OGMyM2MiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjY1MDkyfQ.VFlpXIhl9q1Tf894E7c4XDTEr4mabpvYxLin5GNgPlc`
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNkMDg4NjdiNTVmNTBiMGZjMjFiNjQiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjcyNTgyfQ.501Yks3GfqD8f9TkaOdUFNEzZ_PHELx4bOEh-NsPPBM`
       }
     });
   } catch (error) {
@@ -38,7 +38,7 @@ class GarbageItem extends React.Component{
       "stateOfProduct": "open"
     }, { 
       headers: { 
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNjZWI0NDg1ZDlkMDc3ZGY4OGMyM2MiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjY1MDkyfQ.VFlpXIhl9q1Tf894E7c4XDTEr4mabpvYxLin5GNgPlc`
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmNkMDg4NjdiNTVmNTBiMGZjMjFiNjQiLCJ1c2VyVHlwZSI6ImdpdmVyIiwiaWF0IjoxNjA3MjcyNTgyfQ.501Yks3GfqD8f9TkaOdUFNEzZ_PHELx4bOEh-NsPPBM`
       }
     });
   } catch (error) {
