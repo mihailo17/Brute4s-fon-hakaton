@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {UserContext} from '../contexts/UserContext';
 
 function submitGiverForm(event) {
   event.preventDefault();
@@ -8,41 +7,38 @@ function submitGiverForm(event) {
 
 export default function Giver() {
   return (
-  <UserContext.Consumer>{(context) => {
-    
-    return(
 
     <>
       <h2>Prijavi otpad za sakupljanje:</h2>
       <form onSubmit={submitGiverForm()} id="giver-submit-form">
         
         <div className="form-group">
-          <label for="adresa">Adresa predaje: </label>
+          <label htmlFor="adresa">Adresa predaje: </label>
           <input type="text" name="adresa" id="adresa"></input>
         </div>     
 
         <div className="form-group">
           <input checked type="checkbox" id="metal" name="metal" value="metal"></input>
-          <label for="metal">Metal</label>
+          <label htmlFor="metal">Metal</label>
         </div>
         
         <div className="form-group">
           <input checked type="checkbox" id="staklo" name="staklo" value="staklo"></input>
-          <label for="staklo">Staklo</label>
+          <label htmlFor="staklo">Staklo</label>
         </div>
         
         <div className="form-group">
           <input checked type="checkbox" id="papir" name="papir" value="papir"></input>
-          <label for="papir">Papir</label>
+          <label htmlFor="papir">Papir</label>
         </div>
         
         <div className="form-group">
           <input checked type="checkbox" id="plastika" name="plastika" value="plastika"></input>
-          <label for="plastika">Plastika</label>
+          <label htmlFor="plastika">Plastika</label>
         </div>
         
         <div className="form-group">
-          <label for="kolicina">Kolicina u kilogramima</label>
+          <label htmlFor="kolicina">Kolicina u kilogramima</label>
           <input type="number" name="kolicina" id="kolicina"></input>
         </div>
             
@@ -50,7 +46,4 @@ export default function Giver() {
       </form>
     </>
     )
-  }}</UserContext.Consumer>
-    
-  )
-}
+  }

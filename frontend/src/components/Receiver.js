@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { UserContext } from '../contexts/UserContext'
 function submitReceiverForm(e) {
     e.preventDefault();
 }
@@ -13,19 +12,19 @@ export default function Receiver() {
       <form onSubmit={submitReceiverForm} id="filter-materials">
         <div className="form-group">
           <input checked type="checkbox" id="metal" name="metal" value="metal"></input>
-          <label for="metal">Metal</label>
+          <label htmlFor="metal">Metal</label>
         </div>
         <div className="form-group">
           <input checked type="checkbox" id="staklo" name="staklo" value="staklo"></input>
-          <label for="staklo">Staklo</label>
+          <label htmlFor="staklo">Staklo</label>
         </div>
         <div className="form-group">
           <input checked type="checkbox" id="papir" name="papir" value="papir"></input>
-          <label for="papir">Papir</label>
+          <label htmlFor="papir">Papir</label>
         </div>
         <div className="form-group">
           <input checked type="checkbox" id="plastika" name="plastika" value="plastika"></input>
-          <label for="plastika">Plastika</label>
+          <label htmlFor="plastika">Plastika</label>
         </div>
         <input type="submit" value="Primeni"></input>
       </form>
@@ -36,7 +35,7 @@ export default function Receiver() {
         <input type="submit" value="Potvrdi"></input>
         <div> Div sa mapom:</div>
       </div>
-    
+
     </>
   ) 
 }
