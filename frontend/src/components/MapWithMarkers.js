@@ -204,33 +204,32 @@ class MapWithMarkers extends Component {
       return (
         <div>
           <div className="container">
-            <h2>Filtriraj rezultate:</h2>
-            <h3>Sirovine</h3>
+            <h2 className="mb-4">Filtriraj sirovine</h2>
+            {/* <h3>Sirovine</h3> */}
             <form onSubmit={this.submitReceiverForm} id="filter-materials">
               <div className="form-group">
                 <input type="checkbox" id="metal" name="metal" value="metal"></input>
-                <label htmlFor="metal">Metal</label>
+                <label className="ml-3" htmlFor="metal">Metal</label>
               </div>
               <div className="form-group">
                 <input type="checkbox" id="staklo" name="staklo" value="staklo"></input>
-                <label htmlFor="staklo">Staklo</label>
+                <label className="ml-3" htmlFor="staklo">Staklo</label>
               </div>
               <div className="form-group">
                 <input type="checkbox" id="papir" name="papir" value="papir"></input>
-                <label htmlFor="papir">Papir</label>
+                <label className="ml-3" htmlFor="papir">Papir</label>
               </div>
               <div className="form-group">
                 <input type="checkbox" id="plastika" name="plastika" value="plastika"></input>
-                <label htmlFor="plastika">Plastika</label>
+                <label className="ml-3" htmlFor="plastika">Plastika</label>
               </div>
-              <input className="btn btn-primary" type="submit" value="Primeni"></input>
+              <input className="btn btn-primary mb-5" type="submit" value="Primeni"></input>
             </form>
             
             <div className="giver-locations">
-              <h2>Lokacije sa donatorima sirovina: </h2>
-              <h3>Oznacite lokacije sa kojih zelite da sakupite: </h3>
-              <input type="submit" value="Potvrdi"></input>
-              <div> Div sa mapom:</div>
+              {/* <h2 className="mb-3">Lokacije sa donatorima sirovina: </h2> */}
+              <h4 className="mb-3">Označite lokacije sa kojih želite da sakupite sirovine </h4>
+              <input className="btn btn-success mb-5" type="submit" value="Potvrdi"></input>
             </div>
 
           </div>
@@ -284,33 +283,32 @@ class MapWithMarkers extends Component {
       return (
         <div>
           <div className="container">
-            <h2>Filtriraj rezultate:</h2>
-            <h3>Sirovine</h3>
+            <h2 className="mb-4">Filtriraj sirovine</h2>
+            {/* <h3>Sirovine</h3> */}
             <form onSubmit={this.submitReceiverForm} id="filter-materials">
               <div className="form-group">
                 <input type="checkbox" id="metal" name="metal" value="metal"></input>
-                <label htmlFor="metal">Metal</label>
+                <label className="ml-3" htmlFor="metal">Metal</label>
               </div>
               <div className="form-group">
                 <input type="checkbox" id="staklo" name="staklo" value="staklo"></input>
-                <label htmlFor="staklo">Staklo</label>
+                <label className="ml-3" htmlFor="staklo">Staklo</label>
               </div>
               <div className="form-group">
                 <input type="checkbox" id="papir" name="papir" value="papir"></input>
-                <label htmlFor="papir">Papir</label>
+                <label className="ml-3" htmlFor="papir">Papir</label>
               </div>
               <div className="form-group">
                 <input type="checkbox" id="plastika" name="plastika" value="plastika"></input>
-                <label htmlFor="plastika">Plastika</label>
+                <label className="ml-3" htmlFor="plastika">Plastika</label>
               </div>
-              <input className="btn btn-primary" type="submit" value="Primeni"></input>
+              <input className="btn btn-primary mb-5" type="submit" value="Primeni"></input>
             </form>
             
             <div className="giver-locations">
-              <h2>Lokacije sa donatorima sirovina: </h2>
-              <h3>Oznacite lokacije sa kojih zelite da sakupite: </h3>
-              <input type="submit" value="Potvrdi"></input>
-              <div> Div sa mapom:</div>
+              {/* <h2 className="mb-3">Lokacije sa donatorima sirovina: </h2> */}
+              <h4 className="mb-3">Označite lokacije sa kojih želite da sakupite sirovine </h4>
+              <input className="btn btn-success mb-5" type="submit" value="Potvrdi"></input>
             </div>
           </div>
         <LoadScript

@@ -64,7 +64,7 @@ class MapGiver extends Component {
         return (
           <>
           <button onClick={this.submitForm} className="btn btn-success" type="submit" value="Posalji">Posalji</button>
-          <h3 className="mt-5 mb-5">Izaberite lokaciju preuzimanja:</h3>
+          <h3 className="mt-5 mb-5">Izaberite lokaciju preuzimanja</h3>
           
           <div className="map">
             <LoadScript

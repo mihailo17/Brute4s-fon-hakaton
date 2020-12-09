@@ -31,7 +31,7 @@ export default function Register() {
     <div className="container">
       <form onSubmit={submitRegisterForm} id="register-form">
         <div className="form-group"> 
-          <label htmlFor="select-user-type">Izaberi tip korisnika:</label>
+          <label htmlFor="select-user-type">Tip korisnika</label>
           <select className="custom-select mb lg-3" id="select-user-type" name="select-user-type">
             <option value="giver">Donator</option>
             <option value="receiver">Sakupljac</option>
@@ -40,11 +40,13 @@ export default function Register() {
         
         <div className="form-group">
           <label htmlFor="email">Email</label>
+          <br></br>
           <input type="email" name="email" id="email"></input>
         </div>
         
         <div className="form-group">
           <label htmlFor="password">Sifra</label>
+          <br></br>
           <input name="password" id="password" type="password"></input>
         </div>
         

@@ -6,7 +6,7 @@ export default function Homepage() {
   return (
   <div className="container">
     <div className="jumbotron text-center">
-      <h2 className="mb-4">Dobrodosli u aplikaciju</h2>
+      <h2 className="mb-4">Dobrodošli u aplikaciju!</h2>
       
       <p className="mb-4">Molimo ulogujte se ili registrujte da biste koristili aplikaciju</p>
       

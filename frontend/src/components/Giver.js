@@ -56,8 +56,8 @@ export default class Giver extends Component{
   render(){
     return (
 
-      <div className="container">
-        <h3 className="mb-4">Lista prijavljenih predaja materijala: </h3>
+      <div className="container mb-4">
+        <h3 className="mb-4">Lista prijavljenih sirovina </h3>
       {
         this.state.usersGarbage.map((item, i) => {
       return(
@@ -76,7 +76,7 @@ export default class Giver extends Component{
         })
       }
 
-        <h3 className="mt-4 mb-4">Prijavi otpad za sakupljanje:</h3>
+        <h3 className="mt-4 mb-4">Prijavi otpad za sakupljanje</h3>
         
         <form onSubmit={this.submitGiverForm} id="giver-submit-form">
   
@@ -90,7 +90,7 @@ export default class Giver extends Component{
           </div>
           
           <div className="form-group mb-3">
-            <label htmlFor="quantity">Kolicina u kilogramima</label>
+            <label htmlFor="quantity">Količina u kilogramima</label>
             <br></br>
             <input onChange={this.handleChangeQuantity}  className="form-control" type="number" name="product-quantity" id="product-quantity"></input>
           </div>

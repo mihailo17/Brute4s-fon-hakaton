@@ -16,7 +16,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #DCF8C6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -54,5 +54,6 @@ header div {
 }
 
 body {
-  background-color:#DCF8C6;
+  background-color: #ecffde;
+  font-family: 'Poppins', sans-serif;
 }

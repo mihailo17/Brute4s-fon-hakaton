@@ -46,15 +46,15 @@ class GarbageItem extends React.Component{
   }
   }
   render(){
-    
+
     if (this.state.stateOfProduct === "claimed") {
       return (
         <div className="rounded p-1 list-items-giver">
           <p className="mb-0">
-            <span>{this.state.productType}</span>
-            <span>{this.state.stateOfProduct}</span>
-            {this.state.stateOfProduct}
-            <span>{this.state.quantity} </span>
+            <span>{this.state.productType}</span><span> </span>
+            <span>{this.state.productQuantity}</span><span> </span>
+            <span>{this.state.stateOfProduct}</span><span> </span>
+            <span>{this.state.quantity} </span><span> </span>
             <button className="btn btn-success ml-5 btn-sm" onClick={this.handleCollected}>Pokupljeno</button>
             <button className="btn btn-danger ml-2 btn-sm" onClick={this.handleNonCollected}>Nije pokupljeno</button></p>
         </div>
@@ -63,9 +63,11 @@ class GarbageItem extends React.Component{
     else {
       return (
         <div className="list-items-giver p-1" >
-          <p className="mb-2">{this.state.productType}</p>
-          {/* <span>{this.state.productQuantity}</span> 
-          <span>{this.state.stateOfProduct}</span> */}
+          <p className="mb-2"></p>
+            <span>{this.state.productType}</span><span> </span>
+            <span>{this.state.productQuantity}</span><span> </span>
+            <span>{this.state.stateOfProduct}</span><span> </span>
+            <span>{this.state.quantity} </span><span> </span>
         </div>
       )
     }
